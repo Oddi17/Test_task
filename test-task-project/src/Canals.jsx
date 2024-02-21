@@ -1,22 +1,16 @@
-import React, {useState} from "react"
+import {useState} from "react"
 import Select from 'react-select';
 
 export default function Canals(){
-    const [selected, setSelected] = useState({});
+    const [selected, setSelected] = useState('');
 
     const options = [
-        {value:'vk', label:'Вконтакте'},
-        {value:'wp', label:'WhatsApp'},
-        {value:'tg', label:'Telegram'},
-        {value:'sms', label:'SMS'},
+        {value:'Вконтакте', label:'Вконтакте'},
+        {value:'WhatsApp', label:'WhatsApp'},
+        {value:'Telegram', label:'Telegram'},
+        {value:'SMS', label:'SMS'},
     ]
 
-
-    
-    const handleChange = (event) => {
-        
-        setSelected(event.target.value);
-    } 
 
     const handleSubmit = () => {
         return 
@@ -29,13 +23,19 @@ export default function Canals(){
         <form method="post" onSubmit={handleSubmit}>
             <label>
                 <Select
-                    defaultValue={[]}
+                    placeholder="Выберите каналы"
+                    defaultValue={selected}
                     isMulti
                     name="canals" 
                     options={options}
+                    onChange={setSelected}
                  />
                 <p></p>
                 <input type="submit" value="Сохранить"/>
+            </label>
+            
+            <label>
+
             </label>
         </form>
         </>    
