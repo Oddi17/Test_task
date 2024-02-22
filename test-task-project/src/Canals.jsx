@@ -1,9 +1,10 @@
 import {useState} from "react"
-import Select from 'react-select';
+import Select from 'react-select'
+import Settings from './Settings'
 
 export default function Canals(){
     const [selected, setSelected] = useState('');
-
+    //console.log(selected)
     const options = [
         {value:'Вконтакте', label:'Вконтакте'},
         {value:'WhatsApp', label:'WhatsApp'},
@@ -31,12 +32,17 @@ export default function Canals(){
                     onChange={setSelected}
                  />
                 <p></p>
-                <input type="submit" value="Сохранить"/>
+                
             </label>
+        {selected.length > 0 && 
+            selected.map(canal=>(
+                <Settings key={canal.value} nameCanal={canal.value}/>    
+            ))
+        }
             
-            <label>
-
-            </label>
+            
+            
+        <input type="submit" value="Сохранить"/>
         </form>
         </>    
     )
