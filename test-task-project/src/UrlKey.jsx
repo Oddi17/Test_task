@@ -38,6 +38,7 @@ export default function UrlKey(){
                                     placeholder='введите ссылку' 
                                     value ={itemUrl.urlValue}
                                     onChange = {(e) => handleUrlChange(itemUrl.id,e.target.value,false)}
+                                    maxLength="11"
                                 />
                                 <div className='buttons'>
                                     <Button classname='button' handleClick={(e) => 

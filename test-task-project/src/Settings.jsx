@@ -1,12 +1,12 @@
 import Button from './Button'
 import { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid';
-import UrlKey from './UrlKey';
+//import UrlKey from './UrlKey';
 
 export default function Settings(props){
     const [textMes,setTextMes] = useState('');
     const [fastMesArea,setFastMesArea] = useState([])
-    //const [urlMesInput,setUrlMesInput] = useState([])
+    const [urlMesInput,setUrlMesInput] = useState([])
 
     const handleTextMesChange = (value,isClear) => {
         isClear ? setTextMes("") : setTextMes(value)
@@ -32,24 +32,24 @@ export default function Settings(props){
         setFastMesArea(newAreas);
     };
 
-    // const handleAddUrl = () => {
-    //     setUrlMesInput(prevUrls => {
-    //         const newUrl = {id : uuidv4(), urlValue: '', namebutton: ''}
-    //         return [...prevUrls,newUrl]
-    //     })
-    // }
-    // const handleDeleteUrl = (id) => {
-    //     const newUrl = [...urlMesInput];
-    //     const index = newUrl.findIndex(itemUrl => itemUrl.id === id);
-    //     newUrl.splice(index,1);
-    //     setUrlMesInput(newUrl)
-    // }
-    // const handleUrlChange = (id, value, isClear) => {
-    //     const newUrl = [...urlMesInput];
-    //     const index = newUrl.findIndex(itemUrl => itemUrl.id === id);
-    //     newUrl[index].urlValue  = isClear ? '' : value;
-    //     setUrlMesInput(newUrl);
-    // }
+    const handleAddUrl = () => {
+        setUrlMesInput(prevUrls => {
+            const newUrl = {id : uuidv4(), urlValue: '', namebutton: ''}
+            return [...prevUrls,newUrl]
+        })
+    }
+    const handleDeleteUrl = (id) => {
+        const newUrl = [...urlMesInput];
+        const index = newUrl.findIndex(itemUrl => itemUrl.id === id);
+        newUrl.splice(index,1);
+        setUrlMesInput(newUrl)
+    }
+    const handleUrlChange = (id, value, isClear) => {
+        const newUrl = [...urlMesInput];
+        const index = newUrl.findIndex(itemUrl => itemUrl.id === id);
+        newUrl[index].urlValue  = isClear ? '' : value;
+        setUrlMesInput(newUrl);
+    }
 
 
     return(
@@ -61,6 +61,7 @@ export default function Settings(props){
                     value={textMes}
                     name="canal-text-content" 
                     onChange={(e)=>handleTextMesChange(e.target.value,false)}
+                    maxLength="11"
                 />
                 <div className='buttons'>
                     <Button classname='button' handleClick={handleAddFast}>Быстрый ответ +</Button>
@@ -81,6 +82,7 @@ export default function Settings(props){
                                         value ={area.textareaValue}
                                         name ="canal-fast-content"
                                         onChange = {(e) => handleTextareaChange(area.id,e.target.value,false)}
+                                        maxLength="11"
                                     />
                                     <div className='buttons'>
                                         <Button classname='button' handleClick={(e) => 
@@ -95,8 +97,8 @@ export default function Settings(props){
                             </label>
                         ))   
             )}
-            <UrlKey />
-            {/* {urlMesInput.length > 0 && (
+            {/* <UrlKey /> */}
+            {urlMesInput.length > 0 && (
                     urlMesInput.map(itemUrl => (
                             <label className='canal-url' key ={itemUrl.id}>
                                 URL для кнопки с ссылкой 
@@ -121,7 +123,7 @@ export default function Settings(props){
                                     </div>  
                             </label>
                         ))   
-            )} */}
+            )}
        </div>
        
     )
